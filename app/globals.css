@@ -31,48 +31,48 @@
 
 /* ============================
    Light Theme (Default)
-   โทน: ขาว / น้ำเงิน / ฟ้า
+   โทน: ขาว / เขียว / มรกต
    ============================ */
 :root {
-  --background: #f0f4f8;
+  --background: #f0f7f4;
   --foreground: #0f172a;
-  --primary: #2563eb;
+  --primary: #059669;
   --primary-foreground: #ffffff;
-  --secondary: #e8eef6;
-  --secondary-foreground: #1e3a5f;
+  --secondary: #e6f5ef;
+  --secondary-foreground: #065f46;
   --muted: #e2e8f0;
   --muted-foreground: #64748b;
-  --accent: #dbeafe;
-  --accent-foreground: #1e3a8a;
+  --accent: #d1fae5;
+  --accent-foreground: #064e3b;
   --card: #ffffff;
   --card-foreground: #0f172a;
   --border: #cbd5e1;
-  --ring: #3b82f6;
+  --ring: #10b981;
   --destructive: #ef4444;
-  --success: #0ea5e9;
+  --success: #10b981;
 }
 
 /* ============================
    Dark Theme
-   โทน: ดำ / น้ำเงินเข้ม / ฟ้าสว่าง
+   โทน: ดำ / เขียวเข้ม / มรกตสว่าง
    ============================ */
 .dark {
   --background: #07090f;
   --foreground: #e2e8f0;
-  --primary: #38bdf8;
-  --primary-foreground: #0c1929;
-  --secondary: #101828;
-  --secondary-foreground: #93c5fd;
+  --primary: #34d399;
+  --primary-foreground: #052e16;
+  --secondary: #0d1f18;
+  --secondary-foreground: #6ee7b7;
   --muted: #131c2e;
   --muted-foreground: #94a3b8;
-  --accent: #172554;
-  --accent-foreground: #93c5fd;
+  --accent: #064e3b;
+  --accent-foreground: #6ee7b7;
   --card: #0d1424;
   --card-foreground: #e2e8f0;
   --border: #1e293b;
-  --ring: #38bdf8;
+  --ring: #34d399;
   --destructive: #f87171;
-  --success: #38bdf8;
+  --success: #34d399;
 }
 
 /* ============================

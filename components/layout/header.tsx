@@ -4,6 +4,7 @@
 // Header / Navbar (Client Component)
 // Premium header with scroll effects, gradient logo,
 // animated nav items, auth state, and sleek mobile menu
+// Theme: Green (#00A651 / #00C9A7 / #34D399)
 // ============================
 
 import { useState, useEffect } from "react";
@@ -75,12 +76,12 @@ export function Header() {
       className={cn(
         "sticky top-0 z-50 w-full transition-all duration-500",
         isScrolled
-          ? "bg-white/95 dark:bg-[#0d1424]/95 backdrop-blur-2xl shadow-lg shadow-blue-500/5 dark:shadow-blue-500/10 border-b border-blue-100/50 dark:border-white/10"
+          ? "bg-white/95 dark:bg-[#0d1424]/95 backdrop-blur-2xl shadow-lg shadow-emerald-500/5 dark:shadow-emerald-500/10 border-b border-emerald-100/50 dark:border-white/10"
           : "bg-white/80 dark:bg-[#0d1424]/80 backdrop-blur-xl border-b border-gray-100 dark:border-white/5"
       )}
     >
       {/* Top accent line */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-linear-to-r from-transparent via-blue-500/60 to-transparent dark:via-cyan-400/40 opacity-80" />
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-linear-to-r from-transparent via-emerald-500/60 to-transparent dark:via-emerald-400/40 opacity-80" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
         <div className="flex h-16 items-center justify-between gap-4">
@@ -88,25 +89,25 @@ export function Header() {
           <Link href="/" className="flex items-center gap-3 shrink-0 group">
             {/* Logo icon container */}
             <div className="relative">
-              <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-500/30 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-xl group-hover:shadow-blue-500/40">
+              <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-emerald-500 to-green-600 text-white shadow-lg shadow-emerald-500/30 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-xl group-hover:shadow-emerald-500/40">
                 <Wallet className="h-5 w-5" />
               </div>
               {/* Glow ring on hover */}
-              <div className="absolute -inset-1 rounded-xl bg-linear-to-br from-blue-400 to-indigo-500 opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-30" />
+              <div className="absolute -inset-1 rounded-xl bg-linear-to-br from-emerald-400 to-green-500 opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-30" />
             </div>
 
             {/* Logo text */}
             <div className="hidden sm:block">
               <div className="flex items-center gap-2">
-                <h1 className="text-lg font-extrabold bg-linear-to-r from-gray-800 via-blue-600 to-gray-800 dark:from-white dark:via-cyan-300 dark:to-white bg-clip-text text-transparent leading-tight tracking-tight transition-all duration-300">
+                <h1 className="text-lg font-extrabold bg-linear-to-r from-gray-800 via-emerald-600 to-gray-800 dark:from-white dark:via-emerald-300 dark:to-white bg-clip-text text-transparent leading-tight tracking-tight transition-all duration-300">
                   DebtFree
                 </h1>
-                <span className="px-1.5 py-0.5 text-[9px] font-bold bg-linear-to-r from-blue-500 to-indigo-500 text-white rounded-md uppercase tracking-wider shadow-sm">
+                <span className="px-1.5 py-0.5 text-[9px] font-bold bg-linear-to-r from-emerald-500 to-green-500 text-white rounded-md uppercase tracking-wider shadow-sm">
                   Beta
                 </span>
               </div>
               <p className="text-[11px] text-gray-400 dark:text-gray-500 font-medium flex items-center gap-1">
-                <Zap className="w-2.5 h-2.5 text-blue-500 dark:text-cyan-400" />
+                <Zap className="w-2.5 h-2.5 text-emerald-500 dark:text-emerald-400" />
                 ปลดหนี้อย่างมีแบบแผน
               </p>
             </div>
@@ -124,7 +125,7 @@ export function Header() {
                       className={cn(
                         "relative flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300",
                         isActive
-                          ? "bg-linear-to-r from-blue-500 to-indigo-500 text-white shadow-lg shadow-blue-500/25"
+                          ? "bg-linear-to-r from-emerald-500 to-green-500 text-white shadow-lg shadow-emerald-500/25"
                           : "text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10 border border-transparent hover:border-gray-200 dark:hover:border-white/10"
                       )}
                     >
@@ -133,7 +134,7 @@ export function Header() {
                           "w-4 h-4 transition-all duration-300",
                           isActive
                             ? "text-white"
-                            : "text-gray-400 dark:text-gray-500 group-hover/nav:text-blue-500 dark:group-hover/nav:text-cyan-400 group-hover/nav:scale-110"
+                            : "text-gray-400 dark:text-gray-500 group-hover/nav:text-emerald-500 dark:group-hover/nav:text-emerald-400 group-hover/nav:scale-110"
                         )}
                       />
                       {item.label}
@@ -160,7 +161,7 @@ export function Header() {
               <div className="flex items-center gap-2">
                 {/* User avatar & name */}
                 <div className="hidden sm:flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10">
-                  <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-linear-to-br from-blue-500 to-indigo-500 text-white text-xs font-bold shadow-sm">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-linear-to-br from-emerald-500 to-green-500 text-white text-xs font-bold shadow-sm">
                     {userInitial}
                   </div>
                   <span className="text-sm font-medium text-gray-700 dark:text-gray-300 max-w-[120px] truncate">
@@ -188,7 +189,7 @@ export function Header() {
                 {/* Home CTA Button */}
                 {isHome && (
                   <Link href="/login" className="hidden sm:block">
-                    <div className="group relative overflow-hidden bg-linear-to-r from-blue-500 via-blue-600 to-indigo-500 hover:from-blue-600 hover:via-blue-700 hover:to-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-blue-500/25 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/35 px-5 py-2 text-sm flex items-center gap-2">
+                    <div className="group relative overflow-hidden bg-linear-to-r from-emerald-500 via-emerald-600 to-green-500 hover:from-emerald-600 hover:via-emerald-700 hover:to-green-600 text-white font-bold rounded-xl shadow-lg shadow-emerald-500/25 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-emerald-500/35 px-5 py-2 text-sm flex items-center gap-2">
                       <span className="relative z-10 flex items-center gap-2">
                         เข้าสู่ระบบ
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
@@ -205,9 +206,9 @@ export function Header() {
                     href="/login"
                     className={cn(
                       "flex h-10 items-center gap-2 px-4 rounded-xl border transition-all duration-300 hover:scale-105 active:scale-95",
-                      "border-blue-200 dark:border-blue-500/20 bg-blue-50 dark:bg-blue-500/10",
-                      "hover:bg-blue-100 dark:hover:bg-blue-500/20 hover:border-blue-300 dark:hover:border-blue-500/30",
-                      "text-blue-600 dark:text-blue-400 text-sm font-semibold"
+                      "border-emerald-200 dark:border-emerald-500/20 bg-emerald-50 dark:bg-emerald-500/10",
+                      "hover:bg-emerald-100 dark:hover:bg-emerald-500/20 hover:border-emerald-300 dark:hover:border-emerald-500/30",
+                      "text-emerald-600 dark:text-emerald-400 text-sm font-semibold"
                     )}
                   >
                     <LogIn className="w-4 h-4" />
@@ -224,7 +225,7 @@ export function Header() {
                 "relative flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-300 hover:scale-105 active:scale-95",
                 "border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5",
                 "hover:bg-gray-100 dark:hover:bg-white/10 hover:border-gray-300 dark:hover:border-white/20",
-                "hover:shadow-md hover:shadow-blue-500/5"
+                "hover:shadow-md hover:shadow-emerald-500/5"
               )}
               aria-label={
                 theme === "light"
@@ -245,7 +246,7 @@ export function Header() {
                   "h-4.5 w-4.5 transition-all duration-500 absolute",
                   theme === "light"
                     ? "-rotate-90 scale-0 opacity-0"
-                    : "rotate-0 scale-100 opacity-100 text-blue-400"
+                    : "rotate-0 scale-100 opacity-100 text-emerald-400"
                 )}
               />
             </button>
@@ -307,7 +308,7 @@ export function Header() {
                   className={cn(
                     "flex items-center gap-4 px-4 py-3.5 rounded-2xl text-sm font-semibold transition-all duration-300",
                     isActive
-                      ? "bg-linear-to-r from-blue-500 to-indigo-500 text-white shadow-lg shadow-blue-500/25"
+                      ? "bg-linear-to-r from-emerald-500 to-green-500 text-white shadow-lg shadow-emerald-500/25"
                       : "bg-gray-50 dark:bg-white/5 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10 border border-gray-100 dark:border-white/5 hover:border-gray-200 dark:hover:border-white/10"
                   )}
                   onClick={() => setMobileMenuOpen(false)}
@@ -337,7 +338,7 @@ export function Header() {
                 <div className="space-y-2">
                   {/* User info */}
                   <div className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/5">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-linear-to-br from-blue-500 to-indigo-500 text-white text-sm font-bold shadow-sm">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-linear-to-br from-emerald-500 to-green-500 text-white text-sm font-bold shadow-sm">
                       {userInitial}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -366,7 +367,7 @@ export function Header() {
                   href="/login"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  <div className="flex items-center justify-center gap-2 w-full bg-linear-to-r from-blue-500 to-indigo-500 text-white hover:from-blue-600 hover:to-indigo-600 rounded-2xl h-12 font-bold text-sm transition-all duration-300">
+                  <div className="flex items-center justify-center gap-2 w-full bg-linear-to-r from-emerald-500 to-green-500 text-white hover:from-emerald-600 hover:to-green-600 rounded-2xl h-12 font-bold text-sm transition-all duration-300">
                     <LogIn className="w-4 h-4" />
                     เข้าสู่ระบบ
                   </div>

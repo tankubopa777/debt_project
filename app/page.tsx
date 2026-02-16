@@ -25,36 +25,36 @@ const FEATURES = [
     title: "ตั้งเป้าหมายปลดหนี้",
     description:
       "กำหนดเป้าหมายและระยะเวลาที่ต้องการปลดหนี้ ระบบจะคำนวณแผนให้คุณอัตโนมัติ",
-    gradient: "from-cyan-400 to-blue-500",
-    lightIcon: "text-blue-600",
-    darkIcon: "dark:text-cyan-400",
+    gradient: "from-emerald-400 to-green-500",
+    lightIcon: "text-emerald-600",
+    darkIcon: "dark:text-emerald-400",
   },
   {
     icon: TrendingDown,
     title: "ติดตามยอดหนี้แบบเรียลไทม์",
     description:
       "ดูยอดหนี้คงเหลือ ดอกเบี้ยสะสม และความคืบหน้าในการปลดหนี้ได้ทุกเมื่อ",
-    gradient: "from-blue-400 to-indigo-500",
-    lightIcon: "text-indigo-600",
-    darkIcon: "dark:text-blue-400",
+    gradient: "from-green-400 to-teal-500",
+    lightIcon: "text-teal-600",
+    darkIcon: "dark:text-green-400",
   },
   {
     icon: PieChart,
     title: "วิเคราะห์รายรับรายจ่าย",
     description:
       "เข้าใจพฤติกรรมการใช้จ่ายของคุณ พร้อมคำแนะนำในการลดรายจ่ายที่ไม่จำเป็น",
-    gradient: "from-indigo-400 to-violet-500",
-    lightIcon: "text-violet-600",
-    darkIcon: "dark:text-indigo-400",
+    gradient: "from-teal-400 to-emerald-500",
+    lightIcon: "text-green-600",
+    darkIcon: "dark:text-teal-400",
   },
   {
     icon: Shield,
     title: "กลยุทธ์ปลดหนี้ที่เหมาะกับคุณ",
     description:
       "เลือกระหว่าง Snowball, Avalanche หรือกลยุทธ์แบบกำหนดเอง ตามสไตล์ของคุณ",
-    gradient: "from-violet-400 to-purple-500",
-    lightIcon: "text-purple-600",
-    darkIcon: "dark:text-violet-400",
+    gradient: "from-green-400 to-emerald-500",
+    lightIcon: "text-emerald-600",
+    darkIcon: "dark:text-green-400",
   },
 ] as const;
 
@@ -79,7 +79,7 @@ const STEPS = [
   },
 ] as const;
 
-// ── Floating particle component (theme-aware) ──
+// ── Floating particle component (theme-aware, green hue) ──
 function FloatingParticles() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -117,7 +117,7 @@ function FloatingParticles() {
         vy: (Math.random() - 0.5) * 0.3,
         size: Math.random() * 3 + 0.8,
         opacity: Math.random() * 0.5 + 0.15,
-        hue: Math.random() * 60 + 200,
+        hue: Math.random() * 60 + 130,
       });
     }
 
@@ -142,7 +142,7 @@ function FloatingParticles() {
         if (dark) {
           ctx.fillStyle = `hsla(${p.hue}, 80%, 70%, ${p.opacity})`;
         } else {
-          ctx.fillStyle = `hsla(${p.hue}, 90%, 55%, ${p.opacity * 1.2})`;
+          ctx.fillStyle = `hsla(${p.hue}, 90%, 45%, ${p.opacity * 1.2})`;
         }
         ctx.fill();
       });
@@ -159,8 +159,8 @@ function FloatingParticles() {
             ctx.lineTo(particles[j].x, particles[j].y);
             const alpha = (1 - dist / maxDist) * (dark ? 0.06 : 0.12);
             ctx.strokeStyle = dark
-              ? `hsla(220, 70%, 70%, ${alpha})`
-              : `hsla(220, 80%, 50%, ${alpha})`;
+              ? `hsla(155, 70%, 70%, ${alpha})`
+              : `hsla(155, 80%, 40%, ${alpha})`;
             ctx.lineWidth = dark ? 0.5 : 0.8;
             ctx.stroke();
           }
@@ -218,7 +218,7 @@ export default function HomePage() {
         {/* ===== BACKGROUND LAYERS ===== */}
 
         {/* Base gradient */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-blue-100 via-indigo-50 to-white dark:from-slate-950 dark:via-[#0a0e1a] dark:to-[#030712]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-emerald-100 via-green-50 to-white dark:from-slate-950 dark:via-[#0a0e1a] dark:to-[#030712]" />
 
         {/* ── LIGHT MODE Aurora ── */}
         <div className="absolute inset-0 dark:hidden">
@@ -226,7 +226,7 @@ export default function HomePage() {
             className="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] rounded-full animate-hero-aurora-1"
             style={{
               background:
-                "radial-gradient(circle, rgba(59,130,246,0.25) 0%, rgba(99,102,241,0.12) 35%, transparent 65%)",
+                "radial-gradient(circle, rgba(0,166,81,0.25) 0%, rgba(16,185,129,0.12) 35%, transparent 65%)",
               transform: `translate(${mousePos.x * 20}px, ${mousePos.y * 20}px)`,
             }}
           />
@@ -234,7 +234,7 @@ export default function HomePage() {
             className="absolute top-[5%] right-[-10%] w-[750px] h-[750px] rounded-full animate-hero-aurora-2"
             style={{
               background:
-                "radial-gradient(circle, rgba(139,92,246,0.22) 0%, rgba(99,102,241,0.10) 35%, transparent 65%)",
+                "radial-gradient(circle, rgba(0,201,167,0.22) 0%, rgba(16,185,129,0.10) 35%, transparent 65%)",
               transform: `translate(${mousePos.x * -15}px, ${mousePos.y * -15}px)`,
             }}
           />
@@ -242,17 +242,17 @@ export default function HomePage() {
             className="absolute bottom-[-15%] left-[15%] w-[700px] h-[700px] rounded-full animate-hero-aurora-3"
             style={{
               background:
-                "radial-gradient(circle, rgba(14,165,233,0.20) 0%, rgba(59,130,246,0.08) 35%, transparent 65%)",
+                "radial-gradient(circle, rgba(52,211,153,0.20) 0%, rgba(0,166,81,0.08) 35%, transparent 65%)",
               transform: `translate(${mousePos.x * 12}px, ${mousePos.y * 12}px)`,
             }}
           />
-          <div className="absolute top-[35%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-linear-to-r from-blue-300/15 via-indigo-300/20 to-violet-300/15 blur-3xl rounded-full animate-hero-breathe" />
+          <div className="absolute top-[35%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-linear-to-r from-emerald-300/15 via-green-300/20 to-teal-300/15 blur-3xl rounded-full animate-hero-breathe" />
 
           {/* Accent streaks */}
-          <div className="absolute top-[8%] left-[25%] w-[300px] h-[2px] bg-linear-to-r from-transparent via-blue-400/30 to-transparent rotate-15 animate-hero-streak" />
-          <div className="absolute top-[15%] right-[20%] w-[250px] h-[2px] bg-linear-to-r from-transparent via-indigo-400/25 to-transparent rotate-[-10deg] animate-hero-streak-reverse" />
+          <div className="absolute top-[8%] left-[25%] w-[300px] h-[2px] bg-linear-to-r from-transparent via-emerald-400/30 to-transparent rotate-15 animate-hero-streak" />
+          <div className="absolute top-[15%] right-[20%] w-[250px] h-[2px] bg-linear-to-r from-transparent via-green-400/25 to-transparent rotate-[-10deg] animate-hero-streak-reverse" />
           <div
-            className="absolute bottom-[30%] left-[10%] w-[200px] h-[2px] bg-linear-to-r from-transparent via-violet-400/20 to-transparent rotate-[5deg] animate-hero-streak"
+            className="absolute bottom-[30%] left-[10%] w-[200px] h-[2px] bg-linear-to-r from-transparent via-teal-400/20 to-transparent rotate-[5deg] animate-hero-streak"
             style={{ animationDelay: "2s" }}
           />
         </div>
@@ -263,7 +263,7 @@ export default function HomePage() {
             className="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] rounded-full animate-hero-aurora-1"
             style={{
               background:
-                "radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(99,102,241,0.08) 40%, transparent 70%)",
+                "radial-gradient(circle, rgba(0,166,81,0.15) 0%, rgba(16,185,129,0.08) 40%, transparent 70%)",
               transform: `translate(${mousePos.x * 25}px, ${mousePos.y * 25}px)`,
             }}
           />
@@ -271,7 +271,7 @@ export default function HomePage() {
             className="absolute top-[20%] right-[-10%] w-[700px] h-[700px] rounded-full animate-hero-aurora-2"
             style={{
               background:
-                "radial-gradient(circle, rgba(139,92,246,0.12) 0%, rgba(168,85,247,0.06) 40%, transparent 70%)",
+                "radial-gradient(circle, rgba(0,201,167,0.12) 0%, rgba(52,211,153,0.06) 40%, transparent 70%)",
               transform: `translate(${mousePos.x * -20}px, ${mousePos.y * -20}px)`,
             }}
           />
@@ -279,11 +279,11 @@ export default function HomePage() {
             className="absolute bottom-[-10%] left-[30%] w-[600px] h-[600px] rounded-full animate-hero-aurora-3"
             style={{
               background:
-                "radial-gradient(circle, rgba(14,165,233,0.12) 0%, rgba(6,182,212,0.06) 40%, transparent 70%)",
+                "radial-gradient(circle, rgba(52,211,153,0.12) 0%, rgba(0,201,167,0.06) 40%, transparent 70%)",
               transform: `translate(${mousePos.x * 15}px, ${mousePos.y * 15}px)`,
             }}
           />
-          <div className="absolute top-[40%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-linear-to-r from-blue-500/5 via-indigo-500/8 to-violet-500/5 blur-3xl rounded-full animate-hero-breathe" />
+          <div className="absolute top-[40%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-linear-to-r from-emerald-500/5 via-green-500/8 to-teal-500/5 blur-3xl rounded-full animate-hero-breathe" />
         </div>
 
         {/* Particles */}
@@ -304,7 +304,7 @@ export default function HomePage() {
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="0.5"
-                  className="text-blue-400 dark:text-blue-300"
+                  className="text-emerald-400 dark:text-emerald-300"
                 />
               </pattern>
             </defs>
@@ -321,8 +321,8 @@ export default function HomePage() {
             transform: `translate(${mousePos.x * -30}px, ${mousePos.y * -30}px)`,
           }}
         >
-          <div className="absolute inset-0 rounded-full border-2 border-blue-300/40 dark:border-blue-400/10" />
-          <div className="absolute inset-2 rounded-full bg-linear-to-br from-blue-400/15 to-indigo-400/15 dark:from-blue-400/5 dark:to-indigo-400/5 backdrop-blur-sm" />
+          <div className="absolute inset-0 rounded-full border-2 border-emerald-300/40 dark:border-emerald-400/10" />
+          <div className="absolute inset-2 rounded-full bg-linear-to-br from-emerald-400/15 to-green-400/15 dark:from-emerald-400/5 dark:to-green-400/5 backdrop-blur-sm" />
           <div className="absolute top-2 left-3 w-3 h-3 rounded-full bg-white/40 dark:bg-white/10 blur-[1px]" />
         </div>
 
@@ -333,31 +333,31 @@ export default function HomePage() {
             transform: `translate(${mousePos.x * 15}px, ${mousePos.y * 15}px)`,
           }}
         >
-          <div className="w-full h-full rounded-2xl border-2 border-indigo-300/40 dark:border-indigo-400/10 rotate-45 bg-linear-to-br from-indigo-100/50 to-violet-100/50 dark:from-indigo-400/5 dark:to-violet-400/5 backdrop-blur-sm shadow-lg shadow-indigo-500/10 dark:shadow-none" />
+          <div className="w-full h-full rounded-2xl border-2 border-teal-300/40 dark:border-teal-400/10 rotate-45 bg-linear-to-br from-green-100/50 to-teal-100/50 dark:from-green-400/5 dark:to-teal-400/5 backdrop-blur-sm shadow-lg shadow-green-500/10 dark:shadow-none" />
         </div>
 
         {/* Small circle - right */}
-        <div className="absolute top-[55%] right-[5%] w-12 h-12 rounded-full bg-linear-to-br from-sky-200/50 to-blue-300/50 dark:from-sky-400/8 dark:to-blue-400/8 border border-sky-300/30 dark:border-sky-400/10 animate-hero-float-reverse hidden lg:block shadow-lg shadow-sky-500/10 dark:shadow-none" />
+        <div className="absolute top-[55%] right-[5%] w-12 h-12 rounded-full bg-linear-to-br from-emerald-200/50 to-green-300/50 dark:from-emerald-400/8 dark:to-green-400/8 border border-emerald-300/30 dark:border-emerald-400/10 animate-hero-float-reverse hidden lg:block shadow-lg shadow-emerald-500/10 dark:shadow-none" />
 
         {/* Wallet glass card */}
         <div
-          className="absolute top-[25%] left-[7%] hidden lg:flex items-center justify-center w-14 h-14 rounded-xl bg-white/60 dark:bg-white/5 border border-blue-200/50 dark:border-white/10 backdrop-blur-md animate-hero-float shadow-xl shadow-blue-500/10 dark:shadow-blue-500/5"
+          className="absolute top-[25%] left-[7%] hidden lg:flex items-center justify-center w-14 h-14 rounded-xl bg-white/60 dark:bg-white/5 border border-emerald-200/50 dark:border-white/10 backdrop-blur-md animate-hero-float shadow-xl shadow-emerald-500/10 dark:shadow-emerald-500/5"
           style={{
             transform: `translate(${mousePos.x * -20}px, ${mousePos.y * -20}px)`,
           }}
         >
-          <Wallet className="w-6 h-6 text-blue-500 dark:text-blue-400/40" />
+          <Wallet className="w-6 h-6 text-emerald-500 dark:text-emerald-400/40" />
         </div>
 
         {/* Target glass card */}
         <div
-          className="absolute top-[35%] right-[7%] hidden lg:flex items-center justify-center w-12 h-12 rounded-xl bg-white/60 dark:bg-white/5 border border-violet-200/50 dark:border-white/10 backdrop-blur-md animate-hero-float-reverse shadow-xl shadow-violet-500/10 dark:shadow-violet-500/5"
+          className="absolute top-[35%] right-[7%] hidden lg:flex items-center justify-center w-12 h-12 rounded-xl bg-white/60 dark:bg-white/5 border border-teal-200/50 dark:border-white/10 backdrop-blur-md animate-hero-float-reverse shadow-xl shadow-teal-500/10 dark:shadow-teal-500/5"
           style={{
             transform: `translate(${mousePos.x * 18}px, ${mousePos.y * 18}px)`,
             animationDelay: "1s",
           }}
         >
-          <Target className="w-5 h-5 text-violet-500 dark:text-violet-400/40" />
+          <Target className="w-5 h-5 text-teal-500 dark:text-teal-400/40" />
         </div>
 
         {/* Shield glass card */}
@@ -372,25 +372,25 @@ export default function HomePage() {
         </div>
 
         {/* Decorative rings */}
-        <div className="absolute top-[65%] left-[15%] w-24 h-24 rounded-full border border-blue-200/30 dark:border-transparent hidden lg:block animate-hero-spin-slow" />
+        <div className="absolute top-[65%] left-[15%] w-24 h-24 rounded-full border border-emerald-200/30 dark:border-transparent hidden lg:block animate-hero-spin-slow" />
         <div
-          className="absolute top-[10%] left-[40%] w-16 h-16 rounded-full border border-indigo-200/25 dark:border-transparent hidden lg:block animate-hero-spin-slow"
+          className="absolute top-[10%] left-[40%] w-16 h-16 rounded-full border border-green-200/25 dark:border-transparent hidden lg:block animate-hero-spin-slow"
           style={{ animationDirection: "reverse", animationDuration: "25s" }}
         />
 
         {/* Glowing accent lines */}
-        <div className="absolute top-0 left-[22%] w-px h-[180px] bg-linear-to-b from-transparent via-blue-400/25 dark:via-blue-400/15 to-transparent animate-hero-line-down hidden lg:block" />
+        <div className="absolute top-0 left-[22%] w-px h-[180px] bg-linear-to-b from-transparent via-emerald-400/25 dark:via-emerald-400/15 to-transparent animate-hero-line-down hidden lg:block" />
         <div
-          className="absolute top-0 right-[28%] w-px h-[140px] bg-linear-to-b from-transparent via-indigo-400/20 dark:via-indigo-400/10 to-transparent animate-hero-line-down hidden lg:block"
+          className="absolute top-0 right-[28%] w-px h-[140px] bg-linear-to-b from-transparent via-green-400/20 dark:via-green-400/10 to-transparent animate-hero-line-down hidden lg:block"
           style={{ animationDelay: "1.5s" }}
         />
         <div
-          className="absolute top-0 left-[55%] w-px h-[100px] bg-linear-to-b from-transparent via-violet-400/15 dark:via-violet-400/8 to-transparent animate-hero-line-down hidden lg:block"
+          className="absolute top-0 left-[55%] w-px h-[100px] bg-linear-to-b from-transparent via-teal-400/15 dark:via-teal-400/8 to-transparent animate-hero-line-down hidden lg:block"
           style={{ animationDelay: "3s" }}
         />
 
         {/* Radial spotlight */}
-        <div className="absolute top-[30%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-linear-to-b from-blue-200/25 via-indigo-100/10 to-transparent dark:from-blue-500/5 dark:via-transparent dark:to-transparent rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-[30%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-linear-to-b from-emerald-200/25 via-green-100/10 to-transparent dark:from-emerald-500/5 dark:via-transparent dark:to-transparent rounded-full blur-3xl pointer-events-none" />
 
         {/* ===== CONTENT ===== */}
         <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 lg:py-20 w-full">
@@ -399,10 +399,10 @@ export default function HomePage() {
             <div
               className={`transition-all duration-700 delay-100 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
             >
-              <div className="mb-8 inline-flex items-center gap-2 bg-white/80 dark:bg-white/7 text-blue-700 dark:text-blue-200 border border-blue-200/60 dark:border-blue-400/20 hover:bg-white/95 dark:hover:bg-white/10 px-5 py-2.5 text-sm font-medium backdrop-blur-xl shadow-lg shadow-blue-500/8 dark:shadow-blue-500/10 rounded-full cursor-default">
+              <div className="mb-8 inline-flex items-center gap-2 bg-white/80 dark:bg-white/7 text-emerald-700 dark:text-emerald-200 border border-emerald-200/60 dark:border-emerald-400/20 hover:bg-white/95 dark:hover:bg-white/10 px-5 py-2.5 text-sm font-medium backdrop-blur-xl shadow-lg shadow-emerald-500/8 dark:shadow-emerald-500/10 rounded-full cursor-default">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
                 </span>
                 วางแผนปลดหนี้อย่างชาญฉลาด
                 <Sparkles className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400" />
@@ -419,7 +419,7 @@ export default function HomePage() {
                 </span>
                 <br />
                 <span className="relative inline-block">
-                  <span className="bg-linear-to-r from-blue-600 via-indigo-500 to-violet-600 dark:from-cyan-300 dark:via-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
+                  <span className="bg-linear-to-r from-emerald-600 via-green-500 to-teal-600 dark:from-emerald-300 dark:via-green-400 dark:to-teal-400 bg-clip-text text-transparent">
                     ด้วยแผนที่ใช่
                   </span>
                   <svg
@@ -444,9 +444,9 @@ export default function HomePage() {
                         y2="0"
                         gradientUnits="userSpaceOnUse"
                       >
-                        <stop stopColor="#3B82F6" />
-                        <stop offset="0.5" stopColor="#6366F1" />
-                        <stop offset="1" stopColor="#8B5CF6" />
+                        <stop stopColor="#00A651" />
+                        <stop offset="0.5" stopColor="#00C9A7" />
+                        <stop offset="1" stopColor="#34D399" />
                       </linearGradient>
                     </defs>
                   </svg>
@@ -459,7 +459,7 @@ export default function HomePage() {
               className={`transition-all duration-700 delay-350 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
             >
               <p className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6">
-                <span className="bg-linear-to-r from-blue-500 via-indigo-500 to-violet-500 dark:from-cyan-400 dark:via-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-emerald-500 via-green-500 to-teal-500 dark:from-emerald-400 dark:via-green-400 dark:to-teal-400 bg-clip-text text-transparent">
                   DebtFree
                 </span>
               </p>
@@ -506,7 +506,7 @@ export default function HomePage() {
                 <Button
                   href="/quiz"
                   size="lg"
-                  className="group relative overflow-hidden bg-linear-to-r from-blue-500 via-blue-600 to-indigo-600 hover:from-blue-600 hover:via-blue-700 hover:to-indigo-700 text-white px-8 py-6 text-lg font-bold rounded-2xl shadow-xl shadow-blue-500/25 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/35 w-full sm:w-auto"
+                  className="group relative overflow-hidden bg-linear-to-r from-emerald-500 via-emerald-600 to-green-600 hover:from-emerald-600 hover:via-emerald-700 hover:to-green-700 text-white px-8 py-6 text-lg font-bold rounded-2xl shadow-xl shadow-emerald-500/25 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/35 w-full sm:w-auto"
                 >
                   <span className="relative z-10 flex items-center gap-2">
                     เริ่มต้นใช้งานฟรี
@@ -518,10 +518,10 @@ export default function HomePage() {
                   href="#features"
                   variant="outline"
                   size="lg"
-                  className="group border-2 border-gray-200 dark:border-white/15 text-gray-700 dark:text-white hover:border-blue-400 dark:hover:border-blue-400/40 hover:text-blue-600 dark:hover:text-blue-300 bg-white/60 dark:bg-white/5 hover:bg-blue-50/80 dark:hover:bg-blue-500/10 px-8 py-6 text-lg font-bold rounded-2xl transition-all duration-300 hover:scale-105 backdrop-blur-sm hover:shadow-xl hover:shadow-blue-500/10 w-full sm:w-auto"
+                  className="group border-2 border-gray-200 dark:border-white/15 text-gray-700 dark:text-white hover:border-emerald-400 dark:hover:border-emerald-400/40 hover:text-emerald-600 dark:hover:text-emerald-300 bg-white/60 dark:bg-white/5 hover:bg-emerald-50/80 dark:hover:bg-emerald-500/10 px-8 py-6 text-lg font-bold rounded-2xl transition-all duration-300 hover:scale-105 backdrop-blur-sm hover:shadow-xl hover:shadow-emerald-500/10 w-full sm:w-auto"
                 >
                   ดูฟีเจอร์ทั้งหมด
-                  <Sparkles className="w-4 h-4 ml-2 text-blue-400 dark:text-blue-300 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <Sparkles className="w-4 h-4 ml-2 text-emerald-400 dark:text-emerald-300 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Button>
               </div>
             </div>
@@ -552,7 +552,7 @@ export default function HomePage() {
         className="relative py-20 sm:py-28 overflow-hidden"
       >
         {/* Section background */}
-        <div className="absolute inset-0 bg-linear-to-b from-white via-blue-50/30 to-white dark:from-[#030712] dark:via-[#0a0e1a] dark:to-[#030712]" />
+        <div className="absolute inset-0 bg-linear-to-b from-white via-green-50/30 to-white dark:from-[#030712] dark:via-[#0a0e1a] dark:to-[#030712]" />
         <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.02]">
           <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -562,7 +562,7 @@ export default function HomePage() {
                 height="40"
                 patternUnits="userSpaceOnUse"
               >
-                <circle cx="20" cy="20" r="1" fill="currentColor" className="text-blue-400" />
+                <circle cx="20" cy="20" r="1" fill="currentColor" className="text-emerald-400" />
               </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#features-grid)" />
@@ -572,7 +572,7 @@ export default function HomePage() {
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="mx-auto max-w-2xl text-center mb-16">
-            <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-white/5 border border-blue-200/50 dark:border-blue-400/15 px-4 py-2 rounded-full text-sm font-medium text-blue-600 dark:text-blue-300 mb-6 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-white/5 border border-emerald-200/50 dark:border-emerald-400/15 px-4 py-2 rounded-full text-sm font-medium text-emerald-600 dark:text-emerald-300 mb-6 backdrop-blur-sm">
               <Sparkles className="w-4 h-4" />
               ฟีเจอร์ครบครัน
             </div>
@@ -580,7 +580,7 @@ export default function HomePage() {
               <span className="text-gray-900 dark:text-white">
                 ทุกเครื่องมือที่คุณ
               </span>
-              <span className="bg-linear-to-r from-blue-600 to-indigo-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-emerald-600 to-green-600 dark:from-emerald-400 dark:to-teal-400 bg-clip-text text-transparent">
                 ต้องการ
               </span>
             </h2>
@@ -596,17 +596,17 @@ export default function HomePage() {
               return (
                 <div
                   key={feature.title}
-                  className="group relative bg-white/70 dark:bg-white/4 border border-gray-200/70 dark:border-white/8 rounded-2xl p-6 sm:p-8 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10 dark:hover:shadow-blue-500/5 hover:-translate-y-1.5 hover:border-blue-300/60 dark:hover:border-blue-400/20 overflow-hidden backdrop-blur-xl"
+                  className="group relative bg-white/70 dark:bg-white/4 border border-gray-200/70 dark:border-white/8 rounded-2xl p-6 sm:p-8 transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-500/10 dark:hover:shadow-emerald-500/5 hover:-translate-y-1.5 hover:border-emerald-300/60 dark:hover:border-emerald-400/20 overflow-hidden backdrop-blur-xl"
                 >
                   {/* Hover gradient overlay */}
-                  <div className="absolute inset-0 bg-linear-to-br from-white/0 via-white/0 to-white/0 group-hover:from-blue-50/60 group-hover:via-transparent group-hover:to-indigo-50/40 dark:group-hover:from-blue-500/5 dark:group-hover:via-transparent dark:group-hover:to-indigo-500/5 transition-all duration-500" />
+                  <div className="absolute inset-0 bg-linear-to-br from-white/0 via-white/0 to-white/0 group-hover:from-emerald-50/60 group-hover:via-transparent group-hover:to-green-50/40 dark:group-hover:from-emerald-500/5 dark:group-hover:via-transparent dark:group-hover:to-green-500/5 transition-all duration-500" />
                   {/* Top accent line */}
                   <div
                     className={`absolute top-0 left-0 right-0 h-px bg-linear-to-r ${feature.gradient} opacity-0 group-hover:opacity-70 transition-opacity duration-500`}
                   />
 
                   <div className="relative">
-                    <div className="w-12 h-12 rounded-xl bg-linear-to-br from-blue-50 to-indigo-50 dark:from-white/10 dark:to-white/5 flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-blue-500/10 border border-blue-100/50 dark:border-transparent">
+                    <div className="w-12 h-12 rounded-xl bg-linear-to-br from-emerald-50 to-green-50 dark:from-white/10 dark:to-white/5 flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-emerald-500/10 border border-emerald-100/50 dark:border-transparent">
                       <Icon
                         className={`w-6 h-6 ${feature.lightIcon} ${feature.darkIcon}`}
                       />
@@ -630,12 +630,12 @@ export default function HomePage() {
           ============================ */}
       <section className="relative py-20 sm:py-28 overflow-hidden">
         {/* Section background */}
-        <div className="absolute inset-0 bg-linear-to-b from-white via-indigo-50/20 to-white dark:from-[#030712] dark:via-[#080c18] dark:to-[#030712]" />
+        <div className="absolute inset-0 bg-linear-to-b from-white via-green-50/20 to-white dark:from-[#030712] dark:via-[#080c18] dark:to-[#030712]" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="mx-auto max-w-2xl text-center mb-16">
-            <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-white/5 border border-indigo-200/50 dark:border-indigo-400/15 px-4 py-2 rounded-full text-sm font-medium text-indigo-600 dark:text-indigo-300 mb-6 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-white/5 border border-emerald-200/50 dark:border-emerald-400/15 px-4 py-2 rounded-full text-sm font-medium text-emerald-600 dark:text-emerald-300 mb-6 backdrop-blur-sm">
               <ArrowRight className="w-4 h-4" />
               เริ่มต้นง่ายๆ
             </div>
@@ -643,7 +643,7 @@ export default function HomePage() {
               <span className="text-gray-900 dark:text-white">
                 แค่{" "}
               </span>
-              <span className="bg-linear-to-r from-indigo-600 to-violet-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-emerald-600 to-teal-600 dark:from-emerald-400 dark:to-teal-400 bg-clip-text text-transparent">
                 3 ขั้นตอน
               </span>
             </h2>
@@ -663,16 +663,16 @@ export default function HomePage() {
                 >
                   {/* Connecting line (between steps) */}
                   {item.step !== "03" && (
-                    <div className="hidden sm:block absolute top-10 left-[60%] w-[80%] h-px bg-linear-to-r from-blue-300/40 via-indigo-300/30 to-transparent dark:from-blue-500/20 dark:via-indigo-500/10 dark:to-transparent" />
+                    <div className="hidden sm:block absolute top-10 left-[60%] w-[80%] h-px bg-linear-to-r from-emerald-300/40 via-green-300/30 to-transparent dark:from-emerald-500/20 dark:via-green-500/10 dark:to-transparent" />
                   )}
 
                   <div className="relative">
                     {/* Step number + icon */}
                     <div className="mx-auto mb-5 relative w-20 h-20">
-                      <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-blue-50 to-indigo-50 dark:from-white/6 dark:to-white/3 border border-blue-100/50 dark:border-white/10 transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-blue-500/10" />
+                      <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-emerald-50 to-green-50 dark:from-white/6 dark:to-white/3 border border-emerald-100/50 dark:border-white/10 transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-emerald-500/10" />
                       <div className="relative flex flex-col items-center justify-center h-full">
-                        <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400 mb-0.5" />
-                        <span className="text-xs font-bold text-indigo-400 dark:text-indigo-300/60">
+                        <Icon className="w-6 h-6 text-emerald-600 dark:text-emerald-400 mb-0.5" />
+                        <span className="text-xs font-bold text-emerald-400 dark:text-emerald-300/60">
                           {item.step}
                         </span>
                       </div>
@@ -696,12 +696,12 @@ export default function HomePage() {
           CTA Section
           ============================ */}
       <section className="relative py-20 sm:py-28 overflow-hidden">
-        <div className="absolute inset-0 bg-linear-to-b from-white to-blue-50/30 dark:from-[#030712] dark:to-[#0a0e1a]" />
+        <div className="absolute inset-0 bg-linear-to-b from-white to-green-50/30 dark:from-[#030712] dark:to-[#0a0e1a]" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="relative overflow-hidden rounded-3xl">
             {/* CTA Background */}
-            <div className="absolute inset-0 bg-linear-to-br from-blue-600 via-indigo-600 to-violet-700 dark:from-blue-700 dark:via-indigo-800 dark:to-violet-900" />
+            <div className="absolute inset-0 bg-linear-to-br from-emerald-600 via-green-600 to-teal-700 dark:from-emerald-700 dark:via-green-800 dark:to-teal-900" />
             <div className="absolute inset-0 opacity-30">
               <div className="absolute top-[-50%] left-[-20%] w-[600px] h-[600px] rounded-full bg-white/10 blur-3xl animate-hero-aurora-1" />
               <div className="absolute bottom-[-50%] right-[-20%] w-[500px] h-[500px] rounded-full bg-white/10 blur-3xl animate-hero-aurora-2" />
@@ -739,7 +739,7 @@ export default function HomePage() {
               <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl mb-4">
                 พร้อมเริ่มต้นเส้นทางปลดหนี้?
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-lg text-sky-100/80 mb-10">
+              <p className="mx-auto mt-4 max-w-xl text-lg text-emerald-100/80 mb-10">
                 เริ่มใช้งาน DebtFree วันนี้ ฟรี ไม่มีค่าใช้จ่าย
                 <br />
                 แค่เริ่มบันทึก ก็เห็นทางออก
@@ -747,7 +747,7 @@ export default function HomePage() {
               <Button
                 href="/dashboard"
                 size="lg"
-                className="group relative overflow-hidden bg-white text-blue-700 font-bold px-10 py-6 text-lg rounded-2xl shadow-xl shadow-black/20 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-white/95"
+                className="group relative overflow-hidden bg-white text-emerald-700 font-bold px-10 py-6 text-lg rounded-2xl shadow-xl shadow-black/20 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-white/95"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   เริ่มใช้งานเลย
