@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
@@ -22,7 +22,15 @@ import { cn } from "@/lib/utils";
 
 type AuthMode = "login" | "register";
 
-function LoginContent() {
+export default function LoginPage() {
+  return (
+    <Suspense fallback={null}>
+      <LoginPageContent />
+    </Suspense>
+  );
+}
+
+function LoginPageContent() {
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirectTo") ?? "/dashboard";
   const errorParam = searchParams.get("error");
@@ -440,19 +448,5 @@ function LoginContent() {
         </div>
       </div>
     </div>
-  );
-}
-
-export default function LoginPage() {
-  return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-          <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
-        </div>
-      }
-    >
-      <LoginContent />
-    </Suspense>
   );
 }
