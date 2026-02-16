@@ -1,8 +1,10 @@
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
+import { userRoutes } from "@/lib/controllers/user.controller";
 
 const app = new Hono().basePath("/api");
 
+// Health check
 app.get("/health", (c) => {
   return c.json({
     status: "ok",
@@ -10,6 +12,9 @@ app.get("/health", (c) => {
     uptime: process.uptime(),
   });
 });
+
+// User routes → /api/users/*
+app.route("/users", userRoutes);
 
 export const GET = handle(app);
 export const POST = handle(app);
