@@ -183,3 +183,34 @@ html {
 .animate-hero-line-down { animation: hero-line-down 4s ease-in-out infinite; }
 .animate-hero-streak { animation: hero-streak 6s ease-in-out infinite; }
 .animate-hero-streak-reverse { animation: hero-streak-reverse 7s ease-in-out infinite; }
+
+/* ============================
+   Form Input Styles
+   ============================ */
+.form-input {
+  display: block;
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--foreground);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-input:focus {
+  border-color: var(--ring);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--ring) 25%, transparent);
+}
+
+.form-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

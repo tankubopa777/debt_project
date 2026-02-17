@@ -1,8 +1,5 @@
-// ============================
-// Quick Actions (Server Component)
-// ปุ่มลัดสำหรับการดำเนินการเร็วๆ
-// ============================
-
+"use client";
+import { motion } from "framer-motion";
 import { Plus, CreditCard, TrendingUp, FileText } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
@@ -40,10 +37,15 @@ export function QuickActions() {
         <CardTitle>ดำเนินการเร็ว</CardTitle>
       </CardHeader>
       <CardContent className="space-y-2">
-        {ACTIONS.map((action) => (
-          <a
+        {ACTIONS.map((action, index) => (
+          <motion.a
             key={action.label}
             href={action.href}
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: index * 0.08, duration: 0.3 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             className="flex items-center gap-3 rounded-xl px-3 py-3 transition-colors hover:bg-muted"
           >
             <div
@@ -54,7 +56,7 @@ export function QuickActions() {
             <span className="text-sm font-medium text-foreground">
               {action.label}
             </span>
-          </a>
+          </motion.a>
         ))}
       </CardContent>
     </Card>

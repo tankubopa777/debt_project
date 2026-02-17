@@ -1,12 +1,4 @@
 "use client";
-
-// ============================
-// Header / Navbar (Client Component)
-// Premium header with scroll effects, gradient logo,
-// animated nav items, auth state, and sleek mobile menu
-// Theme: Green (#00A651 / #00C9A7 / #34D399)
-// ============================
-
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -19,14 +11,13 @@ import {
   ArrowLeftRight,
   Target,
   ClipboardCheck,
-  Sparkles,
-  Zap,
   Sun,
   Moon,
   ArrowRight,
   LogIn,
   LogOut,
   Loader2,
+  ChevronDown,
 } from "lucide-react";
 import { useTheme } from "@/components/providers/theme-provider";
 import { useAuth } from "@/components/providers/auth-provider";
@@ -44,6 +35,7 @@ const NAV_ITEMS = [
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
   const { user, loading, signOut } = useAuth();
@@ -51,7 +43,7 @@ export function Header() {
   const isHome = pathname === "/";
   const isLoginPage = pathname === "/login";
 
-  // Track scroll for header glass effect
+  // Track scroll for header style
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -59,6 +51,20 @@ export function Header() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Close user menu on outside click
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest("[data-user-menu]")) {
+        setUserMenuOpen(false);
+      }
+    };
+    if (userMenuOpen) {
+      document.addEventListener("click", handleClick);
+      return () => document.removeEventListener("click", handleClick);
+    }
+  }, [userMenuOpen]);
 
   // Get display name or email initial
   const userDisplayName =
@@ -74,40 +80,24 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-500",
+        "sticky top-0 z-50 w-full transition-all duration-300",
         isScrolled
-          ? "bg-white/95 dark:bg-[#0d1424]/95 backdrop-blur-2xl shadow-lg shadow-emerald-500/5 dark:shadow-emerald-500/10 border-b border-emerald-100/50 dark:border-white/10"
-          : "bg-white/80 dark:bg-[#0d1424]/80 backdrop-blur-xl border-b border-gray-100 dark:border-white/5"
+          ? "bg-white/90 dark:bg-[#0d1424]/90 backdrop-blur-xl shadow-sm border-b border-gray-200/80 dark:border-white/10"
+          : "bg-white dark:bg-[#0d1424] border-b border-gray-100 dark:border-white/5"
       )}
     >
-      {/* Top accent line */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-linear-to-r from-transparent via-emerald-500/60 to-transparent dark:via-emerald-400/40 opacity-80" />
-
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-4">
           {/* ── Logo ── */}
-          <Link href="/" className="flex items-center gap-3 shrink-0 group">
-            {/* Logo icon container */}
-            <div className="relative">
-              <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-emerald-500 to-green-600 text-white shadow-lg shadow-emerald-500/30 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-xl group-hover:shadow-emerald-500/40">
-                <Wallet className="h-5 w-5" />
-              </div>
-              {/* Glow ring on hover */}
-              <div className="absolute -inset-1 rounded-xl bg-linear-to-br from-emerald-400 to-green-500 opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-30" />
+          <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-600 dark:bg-emerald-500 text-white transition-transform duration-200 group-hover:scale-105">
+              <Wallet className="h-[18px] w-[18px]" />
             </div>
-
-            {/* Logo text */}
             <div className="hidden sm:block">
-              <div className="flex items-center gap-2">
-                <h1 className="text-lg font-extrabold bg-linear-to-r from-gray-800 via-emerald-600 to-gray-800 dark:from-white dark:via-emerald-300 dark:to-white bg-clip-text text-transparent leading-tight tracking-tight transition-all duration-300">
-                  DebtFree
-                </h1>
-                <span className="px-1.5 py-0.5 text-[9px] font-bold bg-linear-to-r from-emerald-500 to-green-500 text-white rounded-md uppercase tracking-wider shadow-sm">
-                  Beta
-                </span>
-              </div>
-              <p className="text-[11px] text-gray-400 dark:text-gray-500 font-medium flex items-center gap-1">
-                <Zap className="w-2.5 h-2.5 text-emerald-500 dark:text-emerald-400" />
+              <h1 className="text-[15px] font-bold text-gray-900 dark:text-white leading-tight tracking-tight">
+                DebtFree
+              </h1>
+              <p className="text-[10px] text-gray-400 dark:text-gray-500 font-medium leading-tight">
                 ปลดหนี้อย่างมีแบบแผน
               </p>
             </div>
@@ -115,32 +105,32 @@ export function Header() {
 
           {/* ── Desktop Navigation ── */}
           {!isHome && !isLoginPage && (
-            <nav className="hidden items-center gap-1.5 md:flex">
+            <nav className="hidden items-center gap-0.5 md:flex">
               {NAV_ITEMS.map((item) => {
                 const isActive = pathname.startsWith(item.href);
                 const Icon = item.icon;
                 return (
-                  <Link key={item.href} href={item.href} className="group/nav">
+                  <Link key={item.href} href={item.href}>
                     <div
                       className={cn(
-                        "relative flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300",
+                        "relative flex items-center gap-2 px-3.5 py-2 rounded-lg text-[13px] font-medium transition-all duration-200",
                         isActive
-                          ? "bg-linear-to-r from-emerald-500 to-green-500 text-white shadow-lg shadow-emerald-500/25"
-                          : "text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10 border border-transparent hover:border-gray-200 dark:hover:border-white/10"
+                          ? "text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10"
+                          : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-white/5"
                       )}
                     >
                       <Icon
                         className={cn(
-                          "w-4 h-4 transition-all duration-300",
+                          "w-4 h-4",
                           isActive
-                            ? "text-white"
-                            : "text-gray-400 dark:text-gray-500 group-hover/nav:text-emerald-500 dark:group-hover/nav:text-emerald-400 group-hover/nav:scale-110"
+                            ? "text-emerald-600 dark:text-emerald-400"
+                            : "text-gray-400 dark:text-gray-500"
                         )}
                       />
                       {item.label}
-                      {/* Active sparkle indicator */}
+                      {/* Active bottom indicator */}
                       {isActive && (
-                        <Sparkles className="w-3 h-3 text-white/70" />
+                        <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-[2px] rounded-full bg-emerald-500 dark:bg-emerald-400" />
                       )}
                     </div>
                   </Link>
@@ -150,66 +140,81 @@ export function Header() {
           )}
 
           {/* ── Right Actions ── */}
-          <div className="flex items-center gap-3">
-            {/* Auth Buttons */}
+          <div className="flex items-center gap-2">
+            {/* Auth Section */}
             {loading ? (
-              <div className="flex items-center justify-center h-10 w-10">
+              <div className="flex items-center justify-center h-9 w-9">
                 <Loader2 className="w-4 h-4 animate-spin text-gray-400" />
               </div>
             ) : user ? (
               /* ── Logged In: User Menu ── */
-              <div className="flex items-center gap-2">
-                {/* User avatar & name */}
-                <div className="hidden sm:flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10">
-                  <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-linear-to-br from-emerald-500 to-green-500 text-white text-xs font-bold shadow-sm">
+              <div className="relative" data-user-menu>
+                <button
+                  onClick={() => setUserMenuOpen(!userMenuOpen)}
+                  className={cn(
+                    "flex items-center gap-2 px-2 py-1.5 rounded-lg transition-colors duration-200",
+                    "hover:bg-gray-50 dark:hover:bg-white/5",
+                    userMenuOpen && "bg-gray-50 dark:bg-white/5"
+                  )}
+                >
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-600 dark:bg-emerald-500 text-white text-xs font-semibold">
                     {userInitial}
                   </div>
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300 max-w-[120px] truncate">
+                  <span className="hidden sm:block text-sm font-medium text-gray-700 dark:text-gray-300 max-w-[100px] truncate">
                     {userDisplayName}
                   </span>
-                </div>
-
-                {/* Sign out button */}
-                <button
-                  onClick={signOut}
-                  className={cn(
-                    "flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-300 hover:scale-105 active:scale-95",
-                    "border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5",
-                    "hover:bg-red-50 dark:hover:bg-red-500/10 hover:border-red-200 dark:hover:border-red-500/20",
-                    "text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400"
-                  )}
-                  title="ออกจากระบบ"
-                >
-                  <LogOut className="w-4 h-4" />
+                  <ChevronDown
+                    className={cn(
+                      "hidden sm:block w-3.5 h-3.5 text-gray-400 transition-transform duration-200",
+                      userMenuOpen && "rotate-180"
+                    )}
+                  />
                 </button>
+
+                {/* Dropdown */}
+                {userMenuOpen && (
+                  <div className="absolute right-0 top-full mt-1.5 w-56 rounded-xl bg-white dark:bg-[#141c2e] border border-gray-200 dark:border-white/10 shadow-lg shadow-black/8 dark:shadow-black/30 py-1.5 z-50">
+                    {/* User info */}
+                    <div className="px-3.5 py-2.5 border-b border-gray-100 dark:border-white/5">
+                      <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">
+                        {userDisplayName}
+                      </p>
+                      <p className="text-xs text-gray-400 dark:text-gray-500 truncate mt-0.5">
+                        {user.email}
+                      </p>
+                    </div>
+                    {/* Sign out */}
+                    <div className="p-1.5">
+                      <button
+                        onClick={() => {
+                          setUserMenuOpen(false);
+                          signOut();
+                        }}
+                        className="flex items-center gap-2.5 w-full px-3 py-2 rounded-lg text-sm text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors duration-200"
+                      >
+                        <LogOut className="w-4 h-4" />
+                        ออกจากระบบ
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               /* ── Not Logged In: Login Button ── */
               <>
-                {/* Home CTA Button */}
                 {isHome && (
                   <Link href="/login" className="hidden sm:block">
-                    <div className="group relative overflow-hidden bg-linear-to-r from-emerald-500 via-emerald-600 to-green-500 hover:from-emerald-600 hover:via-emerald-700 hover:to-green-600 text-white font-bold rounded-xl shadow-lg shadow-emerald-500/25 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-emerald-500/35 px-5 py-2 text-sm flex items-center gap-2">
-                      <span className="relative z-10 flex items-center gap-2">
-                        เข้าสู่ระบบ
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                      </span>
-                      {/* Shine sweep effect */}
-                      <span className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                    <div className="bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-600 text-white font-semibold rounded-lg px-4 py-2 text-sm flex items-center gap-2 transition-colors duration-200">
+                      เข้าสู่ระบบ
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </div>
                   </Link>
                 )}
 
-                {/* Login icon (non-home, non-login pages) */}
                 {!isHome && !isLoginPage && (
                   <Link
                     href="/login"
-                    className={cn(
-                      "flex h-10 items-center gap-2 px-4 rounded-xl border transition-all duration-300 hover:scale-105 active:scale-95",
-                      "border-emerald-200 dark:border-emerald-500/20 bg-emerald-50 dark:bg-emerald-500/10",
-                      "hover:bg-emerald-100 dark:hover:bg-emerald-500/20 hover:border-emerald-300 dark:hover:border-emerald-500/30",
-                      "text-emerald-600 dark:text-emerald-400 text-sm font-semibold"
-                    )}
+                    className="flex h-9 items-center gap-2 px-3.5 rounded-lg text-sm font-medium text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 hover:bg-emerald-100 dark:hover:bg-emerald-500/15 transition-colors duration-200"
                   >
                     <LogIn className="w-4 h-4" />
                     <span className="hidden sm:inline">เข้าสู่ระบบ</span>
@@ -218,15 +223,13 @@ export function Header() {
               </>
             )}
 
+            {/* Divider */}
+            <div className="w-px h-5 bg-gray-200 dark:bg-white/10 mx-0.5" />
+
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className={cn(
-                "relative flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-300 hover:scale-105 active:scale-95",
-                "border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5",
-                "hover:bg-gray-100 dark:hover:bg-white/10 hover:border-gray-300 dark:hover:border-white/20",
-                "hover:shadow-md hover:shadow-emerald-500/5"
-              )}
+              className="flex h-9 w-9 items-center justify-center rounded-lg text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5 transition-colors duration-200"
               aria-label={
                 theme === "light"
                   ? "Switch to dark mode"
@@ -235,18 +238,18 @@ export function Header() {
             >
               <Sun
                 className={cn(
-                  "h-4.5 w-4.5 transition-all duration-500 absolute",
+                  "h-[18px] w-[18px] transition-all duration-300 absolute",
                   theme === "dark"
                     ? "rotate-90 scale-0 opacity-0"
-                    : "rotate-0 scale-100 opacity-100 text-amber-500"
+                    : "rotate-0 scale-100 opacity-100"
                 )}
               />
               <Moon
                 className={cn(
-                  "h-4.5 w-4.5 transition-all duration-500 absolute",
+                  "h-[18px] w-[18px] transition-all duration-300 absolute",
                   theme === "light"
                     ? "-rotate-90 scale-0 opacity-0"
-                    : "rotate-0 scale-100 opacity-100 text-emerald-400"
+                    : "rotate-0 scale-100 opacity-100"
                 )}
               />
             </button>
@@ -255,32 +258,14 @@ export function Header() {
             {!isHome && !isLoginPage && (
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className={cn(
-                  "flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-300 md:hidden",
-                  "border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5",
-                  "hover:bg-gray-100 dark:hover:bg-white/10 text-gray-600 dark:text-gray-300",
-                  mobileMenuOpen && "bg-gray-100 dark:bg-white/10"
-                )}
+                className="flex h-9 w-9 items-center justify-center rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors duration-200 md:hidden"
                 aria-label="Toggle menu"
               >
-                <div className="relative w-5 h-5">
-                  <X
-                    className={cn(
-                      "w-5 h-5 absolute inset-0 transition-all duration-300",
-                      mobileMenuOpen
-                        ? "rotate-0 scale-100 opacity-100"
-                        : "rotate-90 scale-0 opacity-0"
-                    )}
-                  />
-                  <Menu
-                    className={cn(
-                      "w-5 h-5 absolute inset-0 transition-all duration-300",
-                      mobileMenuOpen
-                        ? "-rotate-90 scale-0 opacity-0"
-                        : "rotate-0 scale-100 opacity-100"
-                    )}
-                  />
-                </div>
+                {mobileMenuOpen ? (
+                  <X className="w-5 h-5" />
+                ) : (
+                  <Menu className="w-5 h-5" />
+                )}
               </button>
             )}
           </div>
@@ -290,15 +275,15 @@ export function Header() {
       {/* ── Mobile Menu ── */}
       <div
         className={cn(
-          "md:hidden overflow-hidden transition-all duration-400 ease-in-out",
+          "md:hidden overflow-hidden transition-all duration-300",
           !isHome && !isLoginPage && mobileMenuOpen
-            ? "max-h-[600px] opacity-100"
+            ? "max-h-[500px] opacity-100"
             : "max-h-0 opacity-0"
         )}
       >
-        <div className="border-t border-gray-100 dark:border-white/10 bg-white/95 dark:bg-[#0d1424]/95 backdrop-blur-xl">
-          <nav className="mx-auto max-w-7xl px-4 py-4 space-y-2 sm:px-6">
-            {NAV_ITEMS.map((item, index) => {
+        <div className="border-t border-gray-100 dark:border-white/5 bg-white dark:bg-[#0d1424]">
+          <nav className="mx-auto max-w-7xl px-4 py-3 space-y-1 sm:px-6">
+            {NAV_ITEMS.map((item) => {
               const isActive = pathname.startsWith(item.href);
               const Icon = item.icon;
               return (
@@ -306,39 +291,32 @@ export function Header() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "flex items-center gap-4 px-4 py-3.5 rounded-2xl text-sm font-semibold transition-all duration-300",
+                    "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors duration-200",
                     isActive
-                      ? "bg-linear-to-r from-emerald-500 to-green-500 text-white shadow-lg shadow-emerald-500/25"
-                      : "bg-gray-50 dark:bg-white/5 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10 border border-gray-100 dark:border-white/5 hover:border-gray-200 dark:hover:border-white/10"
+                      ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400"
+                      : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white"
                   )}
                   onClick={() => setMobileMenuOpen(false)}
-                  style={{
-                    animationDelay: `${index * 0.05}s`,
-                  }}
                 >
                   <Icon
                     className={cn(
-                      "w-5 h-5",
+                      "w-[18px] h-[18px]",
                       isActive
-                        ? "text-white"
+                        ? "text-emerald-600 dark:text-emerald-400"
                         : "text-gray-400 dark:text-gray-500"
                     )}
                   />
                   {item.label}
-                  {isActive && (
-                    <Sparkles className="w-4 h-4 ml-auto text-white/70" />
-                  )}
                 </Link>
               );
             })}
 
-            {/* Mobile User Info & Auth */}
-            <div className="pt-3 border-t border-gray-100 dark:border-white/10 mt-3">
+            {/* Mobile Auth */}
+            <div className="pt-2 border-t border-gray-100 dark:border-white/5 mt-2">
               {user ? (
-                <div className="space-y-2">
-                  {/* User info */}
-                  <div className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/5">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-linear-to-br from-emerald-500 to-green-500 text-white text-sm font-bold shadow-sm">
+                <div className="space-y-1.5">
+                  <div className="flex items-center gap-3 px-3 py-2.5">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 dark:bg-emerald-500 text-white text-sm font-semibold">
                       {userInitial}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -350,15 +328,14 @@ export function Header() {
                       </p>
                     </div>
                   </div>
-                  {/* Sign out */}
                   <button
                     onClick={() => {
                       setMobileMenuOpen(false);
                       signOut();
                     }}
-                    className="flex items-center justify-center gap-2 w-full bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-500/20 rounded-2xl h-12 font-semibold text-sm border border-red-100 dark:border-red-500/15 transition-all duration-300"
+                    className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors duration-200"
                   >
-                    <LogOut className="w-4 h-4" />
+                    <LogOut className="w-[18px] h-[18px]" />
                     ออกจากระบบ
                   </button>
                 </div>
@@ -366,11 +343,10 @@ export function Header() {
                 <Link
                   href="/login"
                   onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full bg-emerald-600 dark:bg-emerald-500 text-white hover:bg-emerald-700 dark:hover:bg-emerald-600 rounded-lg h-10 font-semibold text-sm transition-colors duration-200"
                 >
-                  <div className="flex items-center justify-center gap-2 w-full bg-linear-to-r from-emerald-500 to-green-500 text-white hover:from-emerald-600 hover:to-green-600 rounded-2xl h-12 font-bold text-sm transition-all duration-300">
-                    <LogIn className="w-4 h-4" />
-                    เข้าสู่ระบบ
-                  </div>
+                  <LogIn className="w-4 h-4" />
+                  เข้าสู่ระบบ
                 </Link>
               )}
             </div>
